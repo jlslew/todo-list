@@ -30,6 +30,27 @@ class TaskController extends AbstractController
         ]);
     }
 
+    #[Route('', methods: ['GET', 'POST'])]
+    public function create(Request $request, EntityManagerInterface $manager, Security $security): Response
+    {
+        $form = $this->createForm(TaskType::class, $task = new Task());
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $task->setUser($security->getUser());
+            $manager->persist($task);
+            $manager->flush();
+
+            return $this->redirectToRoute('app_admin_task_index');
+        }
+
+        return $this->render('admin/task/form.html.twig', [
+            'action' => $this->router->generate('app_admin_task_create'),
+            'form' => $form->createView(),
+            'task' => $task,
+        ]);
+    }
+
     #[Route('/{id}', methods: ['GET', 'POST'])]
     public function update(?Task $task, Request $request, EntityManagerInterface $manager): Response {
         $form = $this->createForm(TaskType::class, $task);
