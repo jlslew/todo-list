@@ -19,7 +19,7 @@ class MessageRepository extends ServiceEntityRepository
         parent::__construct($registry, Message::class);
     }
 
-    public function getAllMessages(?UserInterface $user)
+    public function getAllMessages(?UserInterface $user): array
     {
         return $this->createQueryBuilder('m')
             ->leftJoin('m.task', 't')

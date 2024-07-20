@@ -20,6 +20,10 @@
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-messages" type="submit">
                         <span>{{ 'Messages'|trans }}</span>
                     </button>
+                    <a class="btn" href="{{ path('app_logout') }}">{{ 'Sign Out'|trans }}</a>
+                {% else %}
+                    <a class="btn btn-primary" href="{{ path('app_login') }}">{{ 'Sign In'|trans }}</a>
+                    <a class="btn" href="{{ path('app_user_signup') }}">{{ 'Sign Up'|trans }}</a>
                 {% endif %}
             </div>
         </div>
