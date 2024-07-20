@@ -23,9 +23,11 @@
                             {% endif %}
 
                             <div class="btn-group" role="group" aria-label="CRUD control">
-                                <button type="button" class="btn btn-primary">{{ 'Update'|trans }}</button>
+                                <a class="btn btn-primary" href="{{ path('app_admin_task_update', {id: task.id}) }}">
+                                    <span>{{ 'Update'|trans }}</span>
+                                </a>
 
-                                <form class="delete-task btn btn-primary" action="{{ path('app_admin_task_delete', {id: task.id}) }}" method="post">
+                                <form class="delete-task btn btn-primary p-0" action="{{ path('app_admin_task_delete', {id: task.id}) }}" method="post">
                                     <input type="hidden" name="_token" value="{{ csrf_token('delete-' ~ task.id) }}">
                                     <input type="hidden" name="_method" value="DELETE">
 
