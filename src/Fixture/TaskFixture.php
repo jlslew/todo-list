@@ -44,6 +44,7 @@ class TaskFixture extends Fixture implements DependentFixtureInterface
                     $task->setImageFile(new UploadedFile($path, basename($path), test: true));
                 }
 
+                $this->addReference($title, $task);
                 $manager->persist($task);
             }
         }
