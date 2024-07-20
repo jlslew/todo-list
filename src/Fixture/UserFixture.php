@@ -7,21 +7,18 @@ namespace App\Fixture;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Faker\Factory;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserFixture extends Fixture
 {
     private array $users = [
         [
-            'roles' => ['ROLE_SUPER_ADMIN', 'ROLE_ALLOWED_TO_SWITCH'],
+            'roles' => ['ROLE_ADMIN', 'ROLE_ALLOWED_TO_SWITCH'],
             'email' => 'admin@gmail.com',
         ],
         [
-            'email' => 'alice@gmail.com',
-            'roles' => ['ROLE_USER'],
-        ],
-        [
-            'email' => 'bob@gmail.com',
+            'email' => 'user@gmail.com',
             'roles' => ['ROLE_USER'],
         ],
     ];
@@ -32,6 +29,22 @@ class UserFixture extends Fixture
 
     public function load(ObjectManager $manager): void
     {
+        $faker = Factory::create();
+        $emails = [];
+
+        try {
+            for ($i = 0; $i < 10; ++$i) {
+                $emails[] = $faker->unique()->email;
+            }
+        } finally {
+            foreach ($emails as $email) {
+                $this->users[] = [
+                    'roles' => ['ROLE_USER'],
+                    'email' => $email,
+                ];
+            }
+        }
+
         foreach ($this->users as $u) {
             $user = new User();
             $user->setEmail($u['email']);
