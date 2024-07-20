@@ -35,6 +35,6 @@ class MessageController extends AbstractController
             $manager->flush();
         }
 
-        return new JsonResponse(null, Response::HTTP_NO_CONTENT);
+        return new JsonResponse(null, Response::HTTP_CREATED);
     }
 }

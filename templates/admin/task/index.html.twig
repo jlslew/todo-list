@@ -21,6 +21,17 @@
                             {% if task.description %}
                                 <p>{{ task.description }}</p>
                             {% endif %}
+
+                            <div class="btn-group" role="group" aria-label="CRUD control">
+                                <button type="button" class="btn btn-primary">{{ 'Update'|trans }}</button>
+
+                                <form class="delete-task btn btn-primary" action="{{ path('app_admin_task_delete', {id: task.id}) }}" method="post">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete-' ~ task.id) }}">
+                                    <input type="hidden" name="_method" value="DELETE">
+
+                                    <button class="btn btn-primary" type="submit">{{ 'Delete'|trans }}</button>
+                                </form>
+                            </div>
                         </figcaption>
                     </figure>
                 </div>
