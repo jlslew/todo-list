@@ -27,7 +27,7 @@ class MessageFixture extends Fixture implements DependentFixtureInterface
             $task = $faker->randomElement($tasks);
             $message->setTask($this->getReference($task->getTitle()));
 
-            $this->addReference($message->getContent(), $message);
+//            $this->addReference($message->getContent(), $message);
             $manager->persist($message);
         }
 

@@ -14,7 +14,7 @@ class UserFixture extends Fixture
 {
     private array $users = [
         [
-            'roles' => ['ROLE_ADMIN', 'ROLE_ALLOWED_TO_SWITCH'],
+            'roles' => ['ROLE_USER', 'ROLE_ALLOWED_TO_SWITCH'],
             'email' => 'admin@gmail.com',
         ],
         [
