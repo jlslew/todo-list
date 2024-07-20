@@ -17,7 +17,8 @@
         "symfony/yaml": "6.4.*"
     },
     "require-dev": {
-        "doctrine/doctrine-fixtures-bundle": "^3.6"
+        "doctrine/doctrine-fixtures-bundle": "^3.6",
+        "symfony/maker-bundle": "^1.60"
     },
     "config": {
         "allow-plugins": {
