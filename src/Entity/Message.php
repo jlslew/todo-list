@@ -18,7 +18,7 @@ class Message
     #[ORM\Column]
     private ?string $content = null;
 
-    #[ORM\ManyToOne(cascade: ['all'], inversedBy: 'messages')]
+    #[ORM\ManyToOne(cascade: ['persist'], inversedBy: 'messages')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Task $task = null;
 
