@@ -9,4 +9,23 @@ import * as bootstrap from 'bootstrap';
 
 import './styles/app.css';
 
-console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
+(_ => {
+    const $modal = document.getElementById('modal');
+
+    if ($modal) {
+        $modal.addEventListener('show.bs.modal', e => {
+            const $title = e.relatedTarget.getAttribute('data-title');
+            $modal.querySelector('h5.modal-title').innerHTML = $title;
+
+            $modal.querySelector('#message-user').addEventListener('click', _ => {
+                const $task = e.relatedTarget.getAttribute('data-task');
+                const $message = document.getElementById("message").value;
+
+                fetch('/message/' + $task, {
+                    method: 'POST',
+                    body: $message,
+                }).then(_ => document.getElementById('dismiss-message').click());
+            }, {once: true});
+        });
+    }
+})();
