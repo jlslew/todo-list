@@ -10,6 +10,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/doctrine-migrations-bundle": "^3.3",
+        "friendsofsymfony/jsrouting-bundle": "^3.5",
         "fzaninotto/faker": "^1.5",
         "symfony/asset": "6.4.*",
         "symfony/asset-mapper": "6.4.*",
