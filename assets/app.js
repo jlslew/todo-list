@@ -10,14 +10,14 @@ import * as bootstrap from 'bootstrap';
 import './styles/app.css';
 
 (_ => {
-    const $modal = document.getElementById('modal');
+    const $modalMessage = document.getElementById('modal-message');
 
-    if ($modal) {
-        $modal.addEventListener('show.bs.modal', e => {
+    if ($modalMessage) {
+        $modalMessage.addEventListener('show.bs.modal', e => {
             const $title = e.relatedTarget.getAttribute('data-title');
-            $modal.querySelector('h5.modal-title').innerHTML = $title;
+            $modalMessage.querySelector('h5.modal-title').innerHTML = $title;
 
-            $modal.querySelector('#message-user').addEventListener('click', _ => {
+            $modalMessage.querySelector('#message-user').addEventListener('click', _ => {
                 const $task = e.relatedTarget.getAttribute('data-task');
                 const $message = document.getElementById("message").value;
 
@@ -26,6 +26,37 @@ import './styles/app.css';
                     body: $message,
                 }).then(_ => document.getElementById('dismiss-message').click());
             }, {once: true});
+        });
+    }
+
+    const $modalMessages = document.getElementById('modal-messages');
+
+    if ($modalMessages) {
+        $modalMessages.addEventListener('show.bs.modal', _ => {
+            const $body = $modalMessages.querySelector('.modal-body');
+            $body.innerHTML = '';
+
+            fetch('/messages').then(response => response.json()).then(data => {
+                if (data.length) {
+                    const $ul = document.createElement('ul');
+                    $ul.classList.add('list-group');
+
+                    $body.appendChild($ul);
+
+                    data.forEach(message => {
+                        const $item = document.createElement('li');
+                        $item.classList.add('list-group-item');
+
+                        $item.innerHTML = message.content;
+                        $ul.appendChild($item);
+                    });
+                } else {
+                    const $p = document.createElement('p');
+                    $p.innerHTML = $body.getAttribute('data-message');
+
+                    $body.appendChild($p);
+                }
+            });
         });
     }
 })();
