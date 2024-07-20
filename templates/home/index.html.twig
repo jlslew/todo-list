@@ -3,32 +3,6 @@
 {% block title %}Welcome!{% endblock %}
 
 {% block body %}
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="{{ path('app_home_index') }}">To-do List</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapse" aria-controls="collapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="collapse">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ path('app_home_index') }}">Home</a>
-                    </li>
-                </ul>
-
-                {% if app.user %}
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-messages" type="submit">
-                        <span>{{ 'Messages'|trans }}</span>
-                    </button>
-                    <a class="btn" href="{{ path('app_logout') }}">{{ 'Sign Out'|trans }}</a>
-                {% else %}
-                    <a class="btn btn-primary" href="{{ path('app_login') }}">{{ 'Sign In'|trans }}</a>
-                    <a class="btn" href="{{ path('app_user_signup') }}">{{ 'Sign Up'|trans }}</a>
-                {% endif %}
-            </div>
-        </div>
-    </nav>
-
     <div class="accordion" id="accordion">
         {% for i, task in tasks %}
             <div class="accordion-item">
@@ -48,7 +22,7 @@
                                 <p>{{ task.description }}</p>
                             {% endif %}
 
-                            <button class="message-user btn btn-lg btn-primary" data-bs-toggle="modal" data-bs-target="#modal-message" data-task="{{ task.id }}" data-title="{{ task.title }}">
+                            <button class="message-user btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-message" data-task="{{ task.id }}" data-title="{{ task.title }}">
                                 <span>{{ 'Message user'|trans }}</span>
                             </button>
                         </figcaption>
@@ -76,21 +50,4 @@
             </div>
         </div>
     </div>
-
-    {% if app.user %}
-        <div id="modal-messages" class="modal" tabindex="-1">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">{{ 'Messages'|trans }}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body" data-message="{{ 'There is no message'|trans }}"></div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ 'Close'|trans }}</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% endif %}
 {% endblock %}
