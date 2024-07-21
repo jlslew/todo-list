@@ -14,7 +14,7 @@
                 <div id="collapse-{{ i }}" class="accordion-collapse collapse" data-bs-parent="#accordion">
                     <figure class="accordion-body">
                         {% if task.imageName %}
-                            <img src="{{ vich_uploader_asset(task) }}" alt="{{ task.title }}">
+                            <img class="img-fluid" src="{{ vich_uploader_asset(task) }}" alt="{{ task.title }}">
                         {% endif %}
 
                         <figcaption>

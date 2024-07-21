@@ -14,7 +14,7 @@
                 <div id="collapse-{{ i }}" class="accordion-collapse collapse" data-bs-parent="#accordion">
                     <figure class="accordion-body">
                         {% if task.imageName %}
-                            <img src="{{ vich_uploader_asset(task) }}" alt="{{ task.title }}">
+                            <img class="img-fluid" src="{{ vich_uploader_asset(task) }}" alt="{{ task.title }}">
                         {% endif %}
 
                         <figcaption>
@@ -32,17 +32,17 @@
                                     <button class="btn btn-primary" type="submit">{{ 'Upload'|trans }}</button>
                                 </form>
                                 <div class="btn-group me-2" role="group" aria-label="CRUD Control">
-                                <a class="btn btn-primary" href="{{ path('app_admin_task_update', {id: task.id}) }}">
-                                    <span>{{ 'Update'|trans }}</span>
-                                </a>
+                                    <a class="btn btn-primary" href="{{ path('app_admin_task_update', {id: task.id}) }}">
+                                        <span>{{ 'Update'|trans }}</span>
+                                    </a>
 
-                                <form class="delete-task btn btn-primary p-0" action="{{ path('app_admin_task_delete', {id: task.id}) }}" method="post">
-                                    <input type="hidden" name="_token" value="{{ csrf_token('delete-' ~ task.id) }}">
-                                    <input type="hidden" name="_method" value="DELETE">
+                                    <form class="delete-task btn btn-primary p-0" action="{{ path('app_admin_task_delete', {id: task.id}) }}" method="post">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete-' ~ task.id) }}">
+                                        <input type="hidden" name="_method" value="DELETE">
 
-                                    <button class="btn btn-primary" type="submit">{{ 'Delete'|trans }}</button>
-                                </form>
-                            </div>
+                                        <button class="btn btn-primary" type="submit">{{ 'Delete'|trans }}</button>
+                                    </form>
+                                </div>
                             </div>
                         </figcaption>
                     </figure>
