@@ -1,0 +1,13 @@
+Welcome to my to-do list app.  A simple app to manage tasks.
+
+Note: This project makes use of https://ddev.com to setup a development
+environment identical for all developers
+
+Installation guide:
+ - git clone git@github.com:jlslew/todo-list.git
+ - cd path/to/todo-list
+ - ddev start
+ - ddev composer install
+ - ddev php bin/console doctrine:migration:migrate
+ - ddev php bin/console doctrine:fixture:load
+ - navigate to https://todo-list.ddev.site
