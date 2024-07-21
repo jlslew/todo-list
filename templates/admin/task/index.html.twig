@@ -3,55 +3,63 @@
 {% block title %}Admin - Tasks!{% endblock %}
 
 {% block body %}
-    <div class="accordion" id="accordion">
-        {% for i, task in tasks %}
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ i }}" aria-expanded="false" aria-controls="collapse-{{ i }}">
-                        <span>{{ task.title }}</span>
-                    </button>
-                </h2>
-                <div id="collapse-{{ i }}" class="accordion-collapse collapse" data-bs-parent="#accordion">
-                    <figure class="accordion-body">
-                        {% if task.imageName %}
-                            <img class="img-fluid" src="{{ vich_uploader_asset(task) }}" alt="{{ task.title }}">
-                        {% endif %}
+    <div class="container mt-3 mb-3">
+        <div class="row">
+            <div class="col">
+                <div class="accordion" id="accordion">
+                    {% for i, task in tasks %}
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ i }}" aria-expanded="false" aria-controls="collapse-{{ i }}">
+                                    <span>{{ task.title }}</span>
+                                </button>
+                            </h2>
+                            <div id="collapse-{{ i }}" class="accordion-collapse collapse" data-bs-parent="#accordion">
+                                <figure class="accordion-body">
+                                    {% if task.imageName %}
+                                        <img class="img-fluid" src="{{ vich_uploader_asset(task) }}" alt="{{ task.title }}">
+                                    {% endif %}
 
-                        <figcaption>
-                            {% if task.description %}
-                                <p>{{ task.description }}</p>
-                            {% endif %}
+                                    <figcaption>
+                                        {% if task.description %}
+                                            <p>{{ task.description }}</p>
+                                        {% endif %}
 
-                            <div class="btn-toolbar" role="toolbar" aria-label="Actions">
-                                <form class="delete-task btn-group me-2 p-0" enctype="multipart/form-data" action="{{ path('app_admin_task_upload', {id: task.id}) }}" method="post" aria-label="File Upload">
-                                    <input type="hidden" name="_token" value="{{ csrf_token('upload-' ~ task.id) }}">
+                                        <div class="btn-toolbar" role="toolbar" aria-label="Actions">
+                                            <form class="delete-task btn-group me-2 p-0" enctype="multipart/form-data" action="{{ path('app_admin_task_upload', {id: task.id}) }}" method="post" aria-label="File Upload">
+                                                <input type="hidden" name="_token" value="{{ csrf_token('upload-' ~ task.id) }}">
 
-                                    <label for="formFile" class="form-label visually-hidden">File upload</label>
-                                    <input class="form-control" name="file" type="file" id="upload-image">
+                                                <label for="formFile" class="form-label visually-hidden">File upload</label>
+                                                <input class="form-control" name="file" type="file" id="upload-image">
 
-                                    <button class="btn btn-primary" type="submit">{{ 'Upload'|trans }}</button>
-                                </form>
-                                <div class="btn-group me-2" role="group" aria-label="CRUD Control">
-                                    <a class="btn btn-primary" href="{{ path('app_admin_task_update', {id: task.id}) }}">
-                                        <span>{{ 'Update'|trans }}</span>
-                                    </a>
+                                                <button class="btn btn-primary" type="submit">{{ 'Upload'|trans }}</button>
+                                            </form>
+                                            <div class="btn-group me-2" role="group" aria-label="CRUD Control">
+                                                <a class="btn btn-primary" href="{{ path('app_admin_task_update', {id: task.id}) }}">
+                                                    <span>{{ 'Update'|trans }}</span>
+                                                </a>
 
-                                    <form class="delete-task btn btn-primary p-0" action="{{ path('app_admin_task_delete', {id: task.id}) }}" method="post">
-                                        <input type="hidden" name="_token" value="{{ csrf_token('delete-' ~ task.id) }}">
-                                        <input type="hidden" name="_method" value="DELETE">
+                                                <form class="delete-task btn btn-primary p-0" action="{{ path('app_admin_task_delete', {id: task.id}) }}" method="post">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token('delete-' ~ task.id) }}">
+                                                    <input type="hidden" name="_method" value="DELETE">
 
-                                        <button class="btn btn-primary" type="submit">{{ 'Delete'|trans }}</button>
-                                    </form>
-                                </div>
+                                                    <button class="btn btn-primary" type="submit">{{ 'Delete'|trans }}</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </figcaption>
+                                </figure>
                             </div>
-                        </figcaption>
-                    </figure>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
-        {% endfor %}
+        </div>
     </div>
 
-    <a class="btn btn-primary" href="{{ path('app_admin_task_create') }}">
-        <span>{{ 'Create'|trans }}</span>
-    </a>
+    <div class="text-center">
+        <a class="btn btn-primary" href="{{ path('app_admin_task_create') }}">
+            <span>{{ 'Create'|trans }}</span>
+        </a>
+    </div>
 {% endblock %}

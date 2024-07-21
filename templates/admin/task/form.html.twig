@@ -3,13 +3,15 @@
 {% block title %}Admin - Tasks!{% endblock %}
 
 {% block body %}
-    <div class="form-thin m-auto w-100">
-        {{ form_start(form, {action: action}) }}
-        {{ form_widget(form) }}
+    <div class="align-items-center d-flex" style="height: calc(100vh - 56px);">
+        <div class="form-thin m-auto w-100">
+            {{ form_start(form, {action: action}) }}
+            {{ form_widget(form) }}
 
-        <button class="btn btn-primary" type="submit">Save</button>
-        <a class="btn" href="{{ path('app_admin_task_index') }}">Back</a>
+            <button class="btn btn-primary" type="submit">Save</button>
+            <a class="btn" href="{{ path('app_admin_task_index') }}">Back</a>
 
-        {{ form_end(form) }}
+            {{ form_end(form) }}
+        </div>
     </div>
 {% endblock %}

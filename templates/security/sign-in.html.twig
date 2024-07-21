@@ -12,31 +12,35 @@
         {% endblock %}
     </head>
     <body>
-        <form class="form-thin m-auto w-100" method="post">
-            {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
+        <div class="align-items-center d-flex" style="height: calc(100vh - 56px);">
+            <form class="form-thin m-auto w-100" method="post">
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
 
-            {% if app.user %}
-                <div class="mb-3">You are logged in as {{ app.user.userIdentifier }},
-                    <a href="{{ path('app_logout') }}">Logout</a>
+                {% if app.user %}
+                    <div class="mb-3">You are logged in as {{ app.user.userIdentifier }},
+                        <a href="{{ path('app_logout') }}">Logout</a>
+                    </div>
+                {% endif %}
+
+                <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+
+                <label for="username">Email</label>
+                <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>
+
+                <label for="password">Password</label>
+                <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
+
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                <div class="mt-3">
+                    <button class="btn btn-primary" type="submit">Sign in</button>
+                    <a class="btn" href="{{ path('app_user_signup') }}">Sign up</a>
+                    <a class="btn" href="{{ path('app_home_index') }}">Back</a>
                 </div>
-            {% endif %}
-
-            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-
-            <label for="username">Email</label>
-            <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>
-
-            <label for="password">Password</label>
-            <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" required>
-
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-            <button class="btn btn-primary" type="submit">Sign in</button>
-            <a class="btn" href="{{ path('app_user_signup') }}">Sign up</a>
-            <a class="btn" href="{{ path('app_home_index') }}">Back</a>
-        </form>
+            </form>
+        </div>
 
         {% block javascripts %}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
