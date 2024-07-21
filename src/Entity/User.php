@@ -39,7 +39,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var Collection<int, Task>
      */
-    #[ORM\OneToMany(Task::class, 'user', ['persist'], 'EAGER', true)]
+    #[ORM\OneToMany(Task::class, 'user', ['persist'], orphanRemoval: true)]
     private Collection $tasks;
 
     public function __construct()

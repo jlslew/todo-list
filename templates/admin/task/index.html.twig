@@ -22,7 +22,16 @@
                                 <p>{{ task.description }}</p>
                             {% endif %}
 
-                            <div class="btn-group" role="group" aria-label="CRUD control">
+                            <div class="btn-toolbar" role="toolbar" aria-label="Actions">
+                                <form class="delete-task btn-group me-2 p-0" enctype="multipart/form-data" action="{{ path('app_admin_task_upload', {id: task.id}) }}" method="post" aria-label="File Upload">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('upload-' ~ task.id) }}">
+
+                                    <label for="formFile" class="form-label visually-hidden">File upload</label>
+                                    <input class="form-control" name="file" type="file" id="upload-image">
+
+                                    <button class="btn btn-primary" type="submit">{{ 'Upload'|trans }}</button>
+                                </form>
+                                <div class="btn-group me-2" role="group" aria-label="CRUD Control">
                                 <a class="btn btn-primary" href="{{ path('app_admin_task_update', {id: task.id}) }}">
                                     <span>{{ 'Update'|trans }}</span>
                                 </a>
@@ -33,6 +42,7 @@
 
                                     <button class="btn btn-primary" type="submit">{{ 'Delete'|trans }}</button>
                                 </form>
+                            </div>
                             </div>
                         </figcaption>
                     </figure>

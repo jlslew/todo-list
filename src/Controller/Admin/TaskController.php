@@ -30,6 +30,19 @@ class TaskController extends AbstractController
         ]);
     }
 
+    #[Route('/upload/{id}', methods: ['POST'])]
+    public function upload(Task $task, Request $request, EntityManagerInterface $manager): Response
+    {
+        if ($this->isCsrfTokenValid('upload-' . $task->getId(), $request->request->get('_token'))) {
+            $task->setImageFile($request->files->get('file'));
+
+            $manager->persist($task);
+            $manager->flush();
+        }
+
+        return $this->redirectToRoute('app_admin_task_index');
+    }
+
     #[Route('', methods: ['GET', 'POST'])]
     public function create(Request $request, EntityManagerInterface $manager, Security $security): Response
     {
@@ -52,7 +65,7 @@ class TaskController extends AbstractController
     }
 
     #[Route('/{id}', methods: ['GET', 'POST'])]
-    public function update(?Task $task, Request $request, EntityManagerInterface $manager): Response {
+    public function update(Task $task, Request $request, EntityManagerInterface $manager): Response {
         $form = $this->createForm(TaskType::class, $task);
         $form->handleRequest($request);
 
