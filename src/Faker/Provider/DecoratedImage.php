@@ -10,7 +10,7 @@ class DecoratedImage extends Base
 {
     public static function imageUrl($width = 640, $height = 480, $category = null, $randomize = true, $word = null)
     {
-        return "https://placehold.co/{$width}x$height";
+        return "https://placehold.co/{$width}x$height/png";
     }
 
     public static function image($dir = null, $width = 640, $height = 480, $category = null, $fullPath = true, $randomize = true, $word = null)
